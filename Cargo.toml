@@ -1,0 +1,10 @@
+[package]
+name = "rust-shell"
+version = "0.1.0"
+edition = "2024"
+rust-version = "1.91"
+
+[dependencies]
+is_executable = "1.0.5"
+crossterm = "0.29.0"
+os_pipe = "1.2.3"

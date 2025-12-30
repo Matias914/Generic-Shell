@@ -32,7 +32,11 @@ impl State for InitState {
                 lexer.increment(char);
                 Box::new(FileDescriptorState)
             }
-            '|' => {
+            '>' => {
+                lexer.increment(char);
+                Box::new(WaitingFileDescriptorState)
+            }
+            '|' | '<' => {
                 lexer.increment(char);
                 Box::new(FinalState)
             }
@@ -111,12 +115,8 @@ impl State for WordState {
             return Box::new(FinalState);
         };
         match char {
-            ' ' | '\n' | '\t' | '<' | '|' => {
+            ' ' | '\n' | '\t' | '<' | '|' | '>' => {
                 Box::new(FinalState)
-            }
-            '>' => {
-                lexer.increment(char);
-                Box::new(WaitingFileDescriptorState)
             }
             '\\' => {
                 lexer.skip();
@@ -230,12 +230,8 @@ impl State for WaitingSingleQuoteState {
             return Box::new(FinalState);
         };
         match char {
-            ' ' | '\n' | '\t' | '<' | '|' => {
+            ' ' | '\n' | '\t' | '<' | '|' | '>' => {
                 Box::new(FinalState)
-            }
-            '>' => {
-                lexer.increment(char);
-                Box::new(WaitingFileDescriptorState)
             }
             '\\' => {
                 lexer.skip();
@@ -260,12 +256,8 @@ impl State for WaitingDoubleQuoteState {
             return Box::new(FinalState);
         };
         match char {
-            ' ' | '\n' | '\t' | '<' | '|' => {
+            ' ' | '\n' | '\t' | '<' | '|' | '>' => {
                 Box::new(FinalState)
-            }
-            '>' => {
-                lexer.increment(char);
-                Box::new(WaitingFileDescriptorState)
             }
             '\\' => {
                 lexer.skip();
