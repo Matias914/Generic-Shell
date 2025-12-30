@@ -1,9 +1,10 @@
 mod commands;
-mod evaluation;
 mod repl;
-mod states;
+mod parser;
 mod utils;
-mod context;
+mod lexer;
+mod input;
+mod history;
 
 fn main() {
     let exit_code = repl::start();

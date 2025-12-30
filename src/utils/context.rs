@@ -1,6 +1,9 @@
+use crate::history::History;
+
 pub struct Context {
     running: bool,
     exit_code: i32,
+    history: History
 }
 
 impl Context {
@@ -8,6 +11,7 @@ impl Context {
         Self {
             running: true,
             exit_code: 0,
+            history: History::new()
         }
     }
 
@@ -25,5 +29,9 @@ impl Context {
 
     pub fn get_exit_code(&self) -> i32 {
         self.exit_code
+    }
+
+    pub fn history(&mut self) -> &mut History {
+        &mut self.history
     }
 }
