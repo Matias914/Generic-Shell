@@ -4,7 +4,6 @@ mod parser;
 mod utils;
 mod lexer;
 mod input;
-mod history;
 
 fn main() {
     let exit_code = repl::start();

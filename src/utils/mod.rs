@@ -1,6 +1,7 @@
 pub mod searcher;
 pub mod context;
 pub mod writer;
+pub mod history;
 
 use std::fmt;
 

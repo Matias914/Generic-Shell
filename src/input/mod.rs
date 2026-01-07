@@ -2,7 +2,7 @@ mod action_tab;
 mod actions;
 
 use std::io::Write;
-use crossterm::event::{read, Event, KeyCode, KeyModifiers};
+use crossterm::event::{read, Event, KeyCode, KeyEventKind, KeyModifiers};
 use crossterm::terminal::{disable_raw_mode, enable_raw_mode};
 use crate::input::action_tab::TabAction;
 use crate::input::actions::*;
@@ -66,6 +66,10 @@ impl LineReader {
 
         loop {
             if let Event::Key(key_event) = read().unwrap() {
+                if key_event.kind != KeyEventKind::Press {
+                    continue;
+                }
+
                 match key_event.code {
                     // Ctrl+C
                     KeyCode::Char('c') if key_event.modifiers.contains(KeyModifiers::CONTROL) => {

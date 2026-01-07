@@ -1,4 +1,4 @@
-use crate::history::History;
+use crate::utils::history::History;
 
 pub struct Context {
     running: bool,
